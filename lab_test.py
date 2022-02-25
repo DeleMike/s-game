@@ -1,12 +1,41 @@
+# game = [
+#     [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
+#     [["wall"], [], [], [], [], ["wall"]],
+#     [["wall"], [], ["wall"], ["player"], [], ["wall"]],
+#     [["wall"], [], ["computer"], ["target", "computer"], [], ["wall"]],
+#     [["wall"], [], ["target"], ["target", "computer"], [], ["wall"]],
+#     [["wall"], [], [], [], [], ["wall"]],
+#     [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]]
+# ]
+
 game = [
-    [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
-    [["wall"], [], [], [], [], ["wall"]],
-    [["wall"], [], ["wall"], ["player"], [], ["wall"]],
-    [["wall"], [], ["computer"], ["target", "computer"], [], ["wall"]],
-    [["wall"], [], ["target"], ["target", "computer"], [], ["wall"]],
-    [["wall"], [], [], [], [], ["wall"]],
-    [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]]
+  [[], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
+  [[], ["wall"], [], [], [], [], [], ["wall"]],
+  [[], ["wall"], [], ["target"], ["computer"], ["target"], [], ["wall"]],
+  [
+    ["wall"],
+    ["wall"],
+    [],
+    ["computer"],
+    ["player"],
+    ["computer"],
+    [],
+    ["wall"]
+  ],
+  [["wall"], [], [], ["target"], ["computer"], ["target"], [], ["wall"]],
+  [["wall"], [], [], [], [], [], [], ["wall"]],
+  [
+    ["wall"],
+    ["wall"],
+    ["wall"],
+    ["wall"],
+    ["wall"],
+    ["wall"],
+    ["wall"],
+    ["wall"]
+  ]
 ]
+
 
 # game = [
 #   [[], [], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
@@ -23,9 +52,6 @@ game = [
 #   [[], [], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], []]
 # ]
 
-
-
-# internal representation
 direction_vector = {
     "up": (-1, 0),
     "down": (+1, 0),
@@ -71,48 +97,45 @@ def move_player(arr, direction):
     # first get the MAXIMUM LENGTH FOR ROWS AND COLUMNS
     max_row_len = 0
     max_col_len = 0
+
     for rows in arr:
         max_row_len = len(rows)
         for _ in rows:
             continue
         max_col_len += 1
 
+    print('max_row_len: ', max_row_len)
+    print('max_col_len: ', max_col_len)
     # get ["player"] position
     row, col = get_player_pos(arr)
+    print('player position is: ', '(', row, ',', col, ')')
 
     # determine what pos to move
     dx, dy = direction_vector[direction]
+    # print('dx, dy = (', dx, ',', dy, ')')
 
-    if direction == 'down':
-        new_row = row + dy
-        new_col = col + dx
-    else:
-        new_row = row + dx
-        new_col = col + dy
+    new_row = row + dx
+    new_col = col + dy
 
+    # down movement check
+    if new_row == max_col_len:
+        new_row = max_col_len - 1
 
-
-    # perform checks to prevent IndexOutBoundError
-    if new_row == max_row_len - 1:
-        # print('Row value has reached its max threshold')
-        new_row = row
-
-    if new_col == max_col_len - 1:
-        # print('Col value has reached its max threshold')
-        new_col = col
-
-    # if the proposed row position to shift to is less than Zero then remain stagnant
+    # up movement check
     if new_row < 0:
         new_row = 0
-        # print('Row value has reached its min threshold')
 
-    # if the proposed column position to shift to is less than Zero then remain stagnant
+    # left movement
     if new_col < 0:
         new_col = 0
-        # print('Col value has reached its min threshold')
+
+    # right movement
+    if new_col == max_row_len:
+        new_col = max_row_len - 1
+
+    # print('player position is now: ', '(', new_row, ',', new_col, ')')
 
     # swap position
-
     temp = arr[row][col]
     arr[row][col] = arr[new_row][new_col]
     arr[new_row][new_col] = temp
@@ -132,10 +155,10 @@ def move_player(arr, direction):
 # print('Row length is: ', max_y_len)
 # print('Col length is: ', max_x_len)
 
-#print('Player position in the game is: ', get_player_pos(game))
+# print('Player position in the game is: ', get_player_pos(game))
 # print('I want to move the player "right": ', move_player(game, 'right'))
 num = 0
 while num < 10:
     move_player(game, 'down')
-   # print('I want to move the player "right": ', move_player(game, 'right'))
+    # print('I want to move the player "right": ', move_player(game, 'right'))
     num += 1
