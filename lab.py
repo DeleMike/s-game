@@ -14,6 +14,85 @@ direction_vector = {
 }
 
 
+def get_player_pos(arr):
+    """
+    Given a description of a game state, this returns the position of of the '[player]' object.
+    If it returns (-1,-1) then that means object wasn't found,
+    """
+    row_pos = 0
+    col_pos = 0
+    z_pos = 0
+    n_col_pos = 0
+
+    for rows in arr:
+        for cols in rows:
+            for z_row in cols:
+                if z_row == 'player':
+                    # print('Found \'player\' Pos: ', (row_pos, z_pos))
+                    # print('Array containing "player": ', rows)
+                    # get pos of "3" in rows arr
+                    for row in rows:
+                        for col in row:
+                            if col == 'player':
+                                return row_pos, n_col_pos
+                        n_col_pos += 1
+                    break
+                z_pos += 1
+            col_pos += 1
+        row_pos += 1
+
+    return -1, -1
+
+
+def move_player(arr, direction):
+    """
+    Move player position based on given direction.
+    """
+    # first get the MAXIMUM LENGTH FOR ROWS AND COLUMNS
+    max_row_len = 0
+    max_col_len = 0
+    for rows in arr:
+        max_row_len = len(rows)
+        for _ in rows:
+            continue
+        max_col_len += 1
+
+    # get ["player"] position
+    row, col = get_player_pos(arr)
+
+    # determine what pos to move
+    dx, dy = direction_vector[direction]
+    new_row = row + dx
+    new_col = col + dy
+
+    # perform checks to prevent IndexOutBoundError
+    if new_row == max_row_len - 1:
+        # print('Row value has reached its max threshold')
+        new_row = row
+
+    if new_col == max_col_len - 1:
+        # print('Col value has reached its max threshold')
+        new_col = col
+
+    # if the proposed row position to shift to is less than Zero then remain stagnant
+    if new_row < 0:
+        new_row = 0
+        # print('Row value has reached its min threshold')
+
+    # if the proposed column position to shift to is less than Zero then remain stagnant
+    if new_col < 0:
+        new_col = 0
+        # print('Col value has reached its min threshold')
+
+    # swap position
+
+    temp = arr[row][col]
+    arr[row][col] = arr[new_row][new_col]
+    arr[new_row][new_col] = temp
+
+    return arr
+
+
 def new_game(level_description):
     """
     Given a description of a game state, create and return a game
@@ -53,7 +132,7 @@ def step_game(game, direction):
 
     This function should not mutate its input.
     """
-    pass
+    return move_player(game, direction)
 
 
 def dump_game(game):
