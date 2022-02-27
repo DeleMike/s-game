@@ -1,40 +1,40 @@
-game = [
-    [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
-    [["wall"], [], [], [], [], ["wall"]],
-    [["wall"], [], ["wall"], ["player"], [], ["wall"]],
-    [["wall"], [], ["computer"], ["target", "computer"], [], ["wall"]],
-    [["wall"], [], ["target"], ["target", "computer"], [], ["wall"]],
-    [["wall"], [], [], [], [], ["wall"]],
-    [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]]
-]
-
 # game = [
-#   [[], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
-#   [[], ["wall"], [], [], [], [], [], ["wall"]],
-#   [[], ["wall"], [], ["target"], ["computer"], ["target"], [], ["wall"]],
-#   [
-#     ["wall"],
-#     ["wall"],
-#     [],
-#     ["computer"],
-#     ["player"],
-#     ["computer"],
-#     [],
-#     ["wall"]
-#   ],
-#   [["wall"], [], [], ["target"], ["computer"], ["target"], [], ["wall"]],
-#   [["wall"], [], [], [], [], [], [], ["wall"]],
-#   [
-#     ["wall"],
-#     ["wall"],
-#     ["wall"],
-#     ["wall"],
-#     ["wall"],
-#     ["wall"],
-#     ["wall"],
-#     ["wall"]
-#   ]
+#     [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
+#     [["wall"], [], [], [], [], ["wall"]],
+#     [["wall"], [], ["wall"], ["player"], [], ["wall"]],
+#     [["wall"], [], ["computer"], ["target", "computer"], [], ["wall"]],
+#     [["wall"], [], ["target"], ["target", "computer"], [], ["wall"]],
+#     [["wall"], [], [], [], [], ["wall"]],
+#     [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]]
 # ]
+
+game = [
+  [[], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
+  [[], ["wall"], [], [], [], [], [], ["wall"]],
+  [[], ["wall"], [], ["target"], ["computer"], ["target"], [], ["wall"]],
+  [
+    ["wall"],
+    ["wall"],
+    [],
+    ["computer"],
+    ["player"],
+    ["computer"],
+    [],
+    ["wall"]
+  ],
+  [["wall"], [], [], ["target"], ["computer"], ["target"], [], ["wall"]],
+  [["wall"], [], [], [], [], [], [], ["wall"]],
+  [
+    ["wall"],
+    ["wall"],
+    ["wall"],
+    ["wall"],
+    ["wall"],
+    ["wall"],
+    ["wall"],
+    ["wall"]
+  ]
+]
 
 
 # game = [
@@ -104,15 +104,15 @@ def move_player(arr, direction):
             continue
         max_col_len += 1
 
-    print('max_row_len: ', max_row_len)
-    print('max_col_len: ', max_col_len)
+    # print('max_row_len: ', max_row_len)
+    # print('max_col_len: ', max_col_len)
     # get ["player"] position
     row, col = get_player_pos(arr)
-    print('player position is: ', '(', row, ',', col, ')')
+    # print('player position is: ', '(', row, ',', col, ')')
 
     # determine what pos to move
     dx, dy = direction_vector[direction]
-    print('dx, dy = (', dx, ',', dy, ')')
+    # print('dx, dy = (', dx, ',', dy, ')')
 
     new_row = row + dx
     new_col = col + dy
@@ -133,25 +133,21 @@ def move_player(arr, direction):
     if new_col == max_row_len:
         new_col = max_row_len - 1
 
-    print('player position is now: ', '(', new_row, ',', new_col, ')')
+    # print('player position is now: ', '(', new_row, ',', new_col, ')')
 
+    # swap position
     # before we swap we have to check if the position we want to move to is not a wall
     # If it is a wall, then the 'Player' Object must remain where it is.
 
-    old_pos = arr[row][col]
-    new_pos = arr[new_row][new_col]
-
-    print('Old Pos is: ', old_pos, 'New Pos is: ', new_pos)
-
-    if new_pos == ['wall']:
-        arr[new_row][new_col] = arr[row][col]
-
-    print('Old Pos is: ', old_pos, 'New Pos is now: ', arr[new_row][new_col])
-
-    # swap position
     temp = arr[row][col]
-    arr[row][col] = arr[new_row][new_col]
-    arr[new_row][new_col] = temp
+    if arr[new_row][new_col] == ['wall']:
+        print('reached a wall')
+    elif arr[new_row][new_col] == ['computer']:
+        print()
+        # TODO: Implement how to move both the computer and player in the desired direction without constraints
+    else:
+        arr[row][col] = arr[new_row][new_col]
+        arr[new_row][new_col] = temp
 
     return arr
 
