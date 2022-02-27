@@ -24,13 +24,11 @@ def get_player_pos(arr):
     z_pos = 0
     n_col_pos = 0
 
+    # trying to access the "['player']" object and locate its location.
     for rows in arr:
         for cols in rows:
             for z_row in cols:
                 if z_row == 'player':
-                    # print('Found \'player\' Pos: ', (row_pos, z_pos))
-                    # print('Array containing "player": ', rows)
-                    # get pos of "3" in rows arr
                     for row in rows:
                         for col in row:
                             if col == 'player':
@@ -58,11 +56,9 @@ def move_player(arr, direction):
             continue
         max_col_len += 1
 
-    print('max_row_len: ', max_row_len)
-    print('max_col_len: ', max_col_len)
     # get ["player"] position
     row, col = get_player_pos(arr)
-    print('player position is: ', '(', row, ',', col, ')')
+    # print('player position is: ', '(', row, ',', col, ')')
 
     # determine what pos to move
     dx, dy = direction_vector[direction]
@@ -71,19 +67,23 @@ def move_player(arr, direction):
     new_row = row + dx
     new_col = col + dy
 
-    # down movement check
+    # down movement check; if the proposed down movement
+    # has exceeded the box boundaries then keep it stagnant
     if new_row == max_col_len:
         new_row = max_col_len - 1
 
-    # up movement check
+    # up movement check; if the proposed up movement
+    # has exceeded the box boundaries then keep it stagnant
     if new_row < 0:
         new_row = 0
 
-    # left movement
+    # left movement; if the proposed left movement
+    # has exceeded the box boundaries then keep it stagnant
     if new_col < 0:
         new_col = 0
 
-    # right movement
+    # right movement; if the proposed right movement
+    # has exceeded the box boundaries then keep it stagnant
     if new_col == max_row_len:
         new_col = max_row_len - 1
 

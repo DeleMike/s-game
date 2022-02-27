@@ -1,40 +1,40 @@
-# game = [
-#     [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
-#     [["wall"], [], [], [], [], ["wall"]],
-#     [["wall"], [], ["wall"], ["player"], [], ["wall"]],
-#     [["wall"], [], ["computer"], ["target", "computer"], [], ["wall"]],
-#     [["wall"], [], ["target"], ["target", "computer"], [], ["wall"]],
-#     [["wall"], [], [], [], [], ["wall"]],
-#     [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]]
-# ]
-
 game = [
-  [[], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
-  [[], ["wall"], [], [], [], [], [], ["wall"]],
-  [[], ["wall"], [], ["target"], ["computer"], ["target"], [], ["wall"]],
-  [
-    ["wall"],
-    ["wall"],
-    [],
-    ["computer"],
-    ["player"],
-    ["computer"],
-    [],
-    ["wall"]
-  ],
-  [["wall"], [], [], ["target"], ["computer"], ["target"], [], ["wall"]],
-  [["wall"], [], [], [], [], [], [], ["wall"]],
-  [
-    ["wall"],
-    ["wall"],
-    ["wall"],
-    ["wall"],
-    ["wall"],
-    ["wall"],
-    ["wall"],
-    ["wall"]
-  ]
+    [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
+    [["wall"], [], [], [], [], ["wall"]],
+    [["wall"], [], ["wall"], ["player"], [], ["wall"]],
+    [["wall"], [], ["computer"], ["target", "computer"], [], ["wall"]],
+    [["wall"], [], ["target"], ["target", "computer"], [], ["wall"]],
+    [["wall"], [], [], [], [], ["wall"]],
+    [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]]
 ]
+
+# game = [
+#   [[], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
+#   [[], ["wall"], [], [], [], [], [], ["wall"]],
+#   [[], ["wall"], [], ["target"], ["computer"], ["target"], [], ["wall"]],
+#   [
+#     ["wall"],
+#     ["wall"],
+#     [],
+#     ["computer"],
+#     ["player"],
+#     ["computer"],
+#     [],
+#     ["wall"]
+#   ],
+#   [["wall"], [], [], ["target"], ["computer"], ["target"], [], ["wall"]],
+#   [["wall"], [], [], [], [], [], [], ["wall"]],
+#   [
+#     ["wall"],
+#     ["wall"],
+#     ["wall"],
+#     ["wall"],
+#     ["wall"],
+#     ["wall"],
+#     ["wall"],
+#     ["wall"]
+#   ]
+# ]
 
 
 # game = [
@@ -143,20 +143,6 @@ def move_player(arr, direction):
     return arr
 
 
-# get arr_row length and arr_col length
-# max_y_len = 0
-# max_x_len = 0
-# for rows in game:
-#     max_y_len = len(rows)
-#     for cols in rows:
-#         continue
-#     max_x_len += 1
-#
-# print('Row length is: ', max_y_len)
-# print('Col length is: ', max_x_len)
-
-# print('Player position in the game is: ', get_player_pos(game))
-# print('I want to move the player "right": ', move_player(game, 'right'))
 num = 0
 while num < 10:
     move_player(game, 'down')
