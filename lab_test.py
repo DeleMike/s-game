@@ -112,7 +112,7 @@ def move_player(arr, direction):
 
     # determine what pos to move
     dx, dy = direction_vector[direction]
-    # print('dx, dy = (', dx, ',', dy, ')')
+    print('dx, dy = (', dx, ',', dy, ')')
 
     new_row = row + dx
     new_col = col + dy
@@ -133,7 +133,20 @@ def move_player(arr, direction):
     if new_col == max_row_len:
         new_col = max_row_len - 1
 
-    # print('player position is now: ', '(', new_row, ',', new_col, ')')
+    print('player position is now: ', '(', new_row, ',', new_col, ')')
+
+    # before we swap we have to check if the position we want to move to is not a wall
+    # If it is a wall, then the 'Player' Object must remain where it is.
+
+    old_pos = arr[row][col]
+    new_pos = arr[new_row][new_col]
+
+    print('Old Pos is: ', old_pos, 'New Pos is: ', new_pos)
+
+    if new_pos == ['wall']:
+        arr[new_row][new_col] = arr[row][col]
+
+    print('Old Pos is: ', old_pos, 'New Pos is now: ', arr[new_row][new_col])
 
     # swap position
     temp = arr[row][col]
@@ -144,7 +157,7 @@ def move_player(arr, direction):
 
 
 num = 0
-while num < 10:
+while num < 5:
     move_player(game, 'down')
     # print('I want to move the player "right": ', move_player(game, 'right'))
     num += 1

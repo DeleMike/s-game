@@ -90,9 +90,15 @@ def move_player(arr, direction):
     # print('player position is now: ', '(', new_row, ',', new_col, ')')
 
     # swap position
+    # before we swap we have to check if the position we want to move to is not a wall
+    # If it is a wall, then the 'Player' Object must remain where it is.
+
     temp = arr[row][col]
-    arr[row][col] = arr[new_row][new_col]
-    arr[new_row][new_col] = temp
+    if arr[new_row][new_col] == ['wall']:
+        pass
+    else:
+        arr[row][col] = arr[new_row][new_col]
+        arr[new_row][new_col] = temp
 
     return arr
 
