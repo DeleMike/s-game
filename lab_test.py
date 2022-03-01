@@ -143,7 +143,8 @@ def move_player(arr, direction):
     if arr[new_row][new_col] == ['wall']:
         print('reached a wall')
     elif arr[new_row][new_col] == ['computer']:
-        print()
+        if direction == 'right' and arr[new_row][new_col+1] == []:
+            print('there is a space')
         # TODO: Implement how to move both the computer and player in the desired direction without constraints
     else:
         arr[row][col] = arr[new_row][new_col]
@@ -154,6 +155,19 @@ def move_player(arr, direction):
 
 num = 0
 while num < 5:
-    move_player(game, 'down')
+    move_player(game, 'right')
     # print('I want to move the player "right": ', move_player(game, 'right'))
     num += 1
+
+
+# def swap_three_items():
+#     arr = ['a', ' ', 'b', 'c', ' ', 'd']
+#     temp = arr[3]
+#     arr[3] = arr[2]
+#     arr[2] = arr[4]
+#     arr[4] = temp
+#     return arr
+#
+#
+# print(swap_three_items())
+
