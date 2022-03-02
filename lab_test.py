@@ -69,6 +69,7 @@ direction_vector = {
     "right": (0, +1),
 }
 
+arr2 = []
 
 def get_player_pos(arr):
     """
@@ -209,4 +210,23 @@ def check_arr():
             print(i)
 
 
-# check_arr()
+def copy_arr(arr):
+    print(id(arr))
+    global arr2
+    arr2 = arr.copy()
+    print(id(arr2))
+
+    arr2[1] = 7
+
+    print(arr)
+    print(arr2)
+
+    return arr2
+
+
+def display_game(lis):
+    print(lis)
+    return lis
+
+
+display_game(copy_arr([1, 2, 3, 4]))
