@@ -93,237 +93,237 @@ def move_player(arr, direction):
     # If it is a wall, then the 'Player' Object must remain where it is.
 
     # check if player and target are in the same position
-    if arr[row][col] == ['target', 'player']:
-        print('a target and a player on the same spot.')
-        # check if there is a target in front of the computer. If there is, place it on top of the target
-        if direction == 'right':
-            if not arr[new_row][new_col]:
-                arr[row][col] = ['target']
-                arr[new_row][new_col] = ['player']
-            elif arr[new_row][new_col] == ['wall']:
-                pass
-            elif arr[new_row][new_col + 1] == ['wall']:
-                arr[new_row][new_col] = ['target', 'player']
-                arr[row][col] = ['target']
-            elif arr[new_row][new_col] == ['target']:
-                if arr[new_row][new_col + 1] == ['target']:
-                    arr[new_row][new_col] = ['target', 'player']
-                    # arr[new_row][new_col + 1] = ['target']
-                    arr[row][col] = ['target']
-                elif arr[new_row][new_col + 1] == ['computer']:
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[new_row][new_col + 1] = ['computer']
-                    arr[row][col] = ['target']
-                else:
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[new_row][new_col + 1] = []
-                    arr[row][col] = ['target']
-            elif arr[new_row][new_col] == ['computer']:
-                if arr[new_row][new_col + 1] == ['target']:
-                    arr[new_row][new_col + 1] = ['target', 'computer']
-                    arr[new_row][new_col] = ['player']
-                    arr[row][col] = ['target']
-                else:
-                    arr[new_row][new_col] = ['player']
-                    arr[new_row][new_col + 1] = ['computer']
-                    arr[row][col] = ['target']
-            elif arr[new_row][new_col] == ['target', 'computer']:
-                if not arr[new_row][new_col + 1]:
-                    arr[new_row][new_col + 1] = ['computer']
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[row][col] = ['target']
-                elif arr[new_row][new_col + 1] == ['computer']:
-                    pass
-                elif arr[new_row][new_col + 1] == ['target', 'computer']:
-                    pass
-                else:
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[new_row][new_col + 1] = ['target', 'computer']
-                    arr[row][col] = ['target']
-            elif not arr[new_row][new_col + 1]:
-                arr[new_row][new_col + 1] = ['computer']
-                arr[new_row][new_col] = ['target', 'player']
-                arr[row][col] = ['target']
-            elif arr[new_row][new_col + 1] == ['target']:
-                print('reached a target')
-                if arr[row][col] == ['target', 'player']:
-                    arr[row][col] = ['target']
-                else:
-                    arr[row][col] = []
-                arr[new_row][new_col] = ['player']
-                arr[new_row][new_col + 1] = ['target', 'computer']
-
-        elif direction == 'left':
-            if not arr[new_row][new_col]:
-                arr[row][col] = ['target']
-                arr[new_row][new_col] = ['player']
-            elif arr[new_row][new_col] == ['wall']:
-                pass
-            elif arr[new_row][new_col - 1] == ['wall']:
-                arr[new_row][new_col] = ['target', 'player']
-                arr[row][col] = ['target']
-            elif arr[new_row][new_col] == ['target']:
-                if arr[new_row][new_col - 1] == ['target']:
-                    arr[new_row][new_col] = ['target', 'player']
-                    # arr[new_row][new_col - 1] = ['target']
-                    arr[row][col] = ['target']
-                elif arr[new_row][new_col - 1] == ['computer']:
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[new_row][new_col - 1] = ['computer']
-                    arr[row][col] = ['target']
-                else:
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[new_row][new_col - 1] = []
-                    arr[row][col] = ['target']
-            elif arr[new_row][new_col] == ['computer']:
-                if arr[new_row][new_col - 1] == ['target']:
-                    arr[new_row][new_col - 1] = ['target', 'computer']
-                    arr[new_row][new_col] = ['player']
-                    arr[row][col] = ['target']
-                else:
-                    arr[new_row][new_col] = ['player']
-                    arr[new_row][new_col - 1] = ['computer']
-                    arr[row][col] = ['target']
-            elif arr[new_row][new_col] == ['target', 'computer']:
-                if not arr[new_row][new_col - 1]:
-                    arr[new_row][new_col - 1] = ['computer']
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[row][col] = ['target']
-                elif arr[new_row][new_col - 1] == ['computer']:
-                    pass
-                elif arr[new_row][new_col - 1] == ['target', 'computer']:
-                    pass
-                else:
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[new_row][new_col - 1] = ['target', 'computer']
-                    arr[row][col] = ['target']
-            elif not arr[new_row][new_col - 1]:
-                arr[new_row][new_col - 1] = ['computer']
-                arr[new_row][new_col] = ['target', 'player']
-                arr[row][col] = ['target']
-            elif arr[new_row][new_col - 1] == ['target']:
-                print('reached a target')
-                if arr[row][col] == ['target', 'player']:
-                    arr[row][col] = ['target']
-                else:
-                    arr[row][col] = []
-                arr[new_row][new_col] = ['player']
-                arr[new_row][new_col - 1] = ['target', 'computer']
-
-        elif direction == 'up':
-            if not arr[new_row][new_col]:
-                arr[row][col] = ['target']
-                arr[new_row][new_col] = ['player']
-            elif arr[new_row][new_col] == ['wall']:
-                pass
-            elif arr[new_row - 1][new_col] == ['wall']:
-                arr[new_row][new_col] = ['target', 'player']
-                arr[row][col] = ['target']
-            elif arr[new_row][new_col] == ['target']:
-                if arr[new_row - 1][new_col] == ['target']:
-                    arr[new_row][new_col] = ['target', 'player']
-                    # arr[new_row - 1][new_col] = ['target']
-                    arr[row][col] = ['target']
-                elif arr[new_row - 1][new_col] == ['computer']:
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[new_row - 1][new_col] = ['computer']
-                    arr[row][col] = ['target']
-                else:
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[new_row - 1][new_col] = []
-                    arr[row][col] = ['target']
-            elif arr[new_row][new_col] == ['computer']:
-                if arr[new_row - 1][new_col] == ['target']:
-                    arr[new_row - 1][new_col] = ['target', 'computer']
-                    arr[new_row][new_col] = ['player']
-                    arr[row][col] = ['target']
-                else:
-                    arr[new_row][new_col] = ['player']
-                    arr[new_row - 1][new_col] = ['computer']
-                    arr[row][col] = ['target']
-            elif arr[new_row - 1][new_col] == ['target', 'computer']:
-                if not arr[new_row][new_col]:
-                    arr[new_row - 1][new_col] = ['computer']
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[row][col] = ['target']
-                elif arr[new_row - 1][new_col] == ['computer']:
-                    pass
-                elif arr[new_row - 1][new_col] == ['target', 'computer']:
-                    pass
-                else:
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[new_row - 1][new_col] = ['target', 'computer']
-                    arr[row][col] = ['target']
-            elif not arr[new_row - 1][new_col]:
-                arr[new_row - 1][new_col] = ['computer']
-                arr[new_row][new_col] = ['target', 'player']
-                arr[row][col] = ['target']
-            elif arr[new_row - 1][new_col] == ['target']:
-                if arr[row][col] == ['target', 'player']:
-                    arr[row][col] = ['target']
-                else:
-                    arr[row][col] = []
-                arr[new_row][new_col] = ['player']
-                arr[new_row - 1][new_col] = ['target', 'computer']
-
-        elif direction == 'down':
-            if not arr[new_row][new_col]:
-                arr[row][col] = ['target']
-                arr[new_row][new_col] = ['player']
-            elif arr[new_row][new_col] == ['wall']:
-                pass
-            elif arr[new_row + 1][new_col] == ['wall']:
-                arr[new_row][new_col] = ['target', 'player']
-                arr[row][col] = ['target']
-            elif arr[new_row][new_col] == ['target']:
-                if arr[new_row + 1][new_col] == ['target']:
-                    arr[new_row][new_col] = ['target', 'player']
-                    # arr[new_row + 1][new_col] = ['target']
-                    arr[row][col] = ['target']
-                elif arr[new_row + 1][new_col] == ['computer']:
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[new_row + 1][new_col] = ['computer']
-                    arr[row][col] = ['target']
-                else:
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[new_row + 1][new_col] = []
-                    arr[row][col] = ['target']
-            elif arr[new_row][new_col] == ['computer']:
-                if arr[new_row + 1][new_col] == ['target']:
-                    arr[new_row + 1][new_col] = ['target', 'computer']
-                    arr[new_row][new_col] = ['player']
-                    arr[row][col] = ['target']
-                else:
-                    arr[new_row][new_col] = ['player']
-                    arr[new_row + 1][new_col] = ['computer']
-                    arr[row][col] = ['target']
-            elif arr[new_row + 1][new_col] == ['target', 'computer']:
-                if not arr[new_row][new_col]:
-                    arr[new_row + 1][new_col] = ['computer']
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[row][col] = ['target']
-                elif arr[new_row + 1][new_col] == ['computer']:
-                    pass
-                elif arr[new_row + 1][new_col] == ['target', 'computer']:
-                    pass
-                else:
-                    arr[new_row][new_col] = ['target', 'player']
-                    arr[new_row + 1][new_col] = ['target', 'computer']
-                    arr[row][col] = ['target']
-            elif not arr[new_row + 1][new_col]:
-                arr[new_row + 1][new_col] = ['computer']
-                arr[new_row][new_col] = ['target', 'player']
-                arr[row][col] = ['target']
-
-            elif arr[new_row + 1][new_col] == ['target']:
-                print('reached a target')
-                if arr[row][col] == ['target', 'player']:
-                    arr[row][col] = ['target']
-                else:
-                    arr[row][col] = []
-                arr[new_row][new_col] = ['player']
-                arr[new_row + 1][new_col] = ['target', 'computer']
-        return arr
+    # if arr[row][col] == ['target', 'player']:
+    #     print('a target and a player on the same spot.')
+    #     # check if there is a target in front of the computer. If there is, place it on top of the target
+    #     if direction == 'right':
+    #         if not arr[new_row][new_col]:
+    #             arr[row][col] = ['target']
+    #             arr[new_row][new_col] = ['player']
+    #         elif arr[new_row][new_col] == ['wall']:
+    #             pass
+    #         elif arr[new_row][new_col + 1] == ['wall']:
+    #             arr[new_row][new_col] = ['target', 'player']
+    #             arr[row][col] = ['target']
+    #         elif arr[new_row][new_col] == ['target']:
+    #             if arr[new_row][new_col + 1] == ['target']:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 # arr[new_row][new_col + 1] = ['target']
+    #                 arr[row][col] = ['target']
+    #             elif arr[new_row][new_col + 1] == ['computer']:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[new_row][new_col + 1] = ['computer']
+    #                 arr[row][col] = ['target']
+    #             else:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[new_row][new_col + 1] = []
+    #                 arr[row][col] = ['target']
+    #         elif arr[new_row][new_col] == ['computer']:
+    #             if arr[new_row][new_col + 1] == ['target']:
+    #                 arr[new_row][new_col + 1] = ['target', 'computer']
+    #                 arr[new_row][new_col] = ['player']
+    #                 arr[row][col] = ['target']
+    #             else:
+    #                 arr[new_row][new_col] = ['player']
+    #                 arr[new_row][new_col + 1] = ['computer']
+    #                 arr[row][col] = ['target']
+    #         elif arr[new_row][new_col] == ['target', 'computer']:
+    #             if not arr[new_row][new_col + 1]:
+    #                 arr[new_row][new_col + 1] = ['computer']
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[row][col] = ['target']
+    #             elif arr[new_row][new_col + 1] == ['computer']:
+    #                 pass
+    #             elif arr[new_row][new_col + 1] == ['target', 'computer']:
+    #                 pass
+    #             else:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[new_row][new_col + 1] = ['target', 'computer']
+    #                 arr[row][col] = ['target']
+    #         elif not arr[new_row][new_col + 1]:
+    #             arr[new_row][new_col + 1] = ['computer']
+    #             arr[new_row][new_col] = ['target', 'player']
+    #             arr[row][col] = ['target']
+    #         elif arr[new_row][new_col + 1] == ['target']:
+    #             print('reached a target')
+    #             if arr[row][col] == ['target', 'player']:
+    #                 arr[row][col] = ['target']
+    #             else:
+    #                 arr[row][col] = []
+    #             arr[new_row][new_col] = ['player']
+    #             arr[new_row][new_col + 1] = ['target', 'computer']
+    #
+    #     elif direction == 'left':
+    #         if not arr[new_row][new_col]:
+    #             arr[row][col] = ['target']
+    #             arr[new_row][new_col] = ['player']
+    #         elif arr[new_row][new_col] == ['wall']:
+    #             pass
+    #         elif arr[new_row][new_col - 1] == ['wall']:
+    #             arr[new_row][new_col] = ['target', 'player']
+    #             arr[row][col] = ['target']
+    #         elif arr[new_row][new_col] == ['target']:
+    #             if arr[new_row][new_col - 1] == ['target']:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 # arr[new_row][new_col - 1] = ['target']
+    #                 arr[row][col] = ['target']
+    #             elif arr[new_row][new_col - 1] == ['computer']:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[new_row][new_col - 1] = ['computer']
+    #                 arr[row][col] = ['target']
+    #             else:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[new_row][new_col - 1] = []
+    #                 arr[row][col] = ['target']
+    #         elif arr[new_row][new_col] == ['computer']:
+    #             if arr[new_row][new_col - 1] == ['target']:
+    #                 arr[new_row][new_col - 1] = ['target', 'computer']
+    #                 arr[new_row][new_col] = ['player']
+    #                 arr[row][col] = ['target']
+    #             else:
+    #                 arr[new_row][new_col] = ['player']
+    #                 arr[new_row][new_col - 1] = ['computer']
+    #                 arr[row][col] = ['target']
+    #         elif arr[new_row][new_col] == ['target', 'computer']:
+    #             if not arr[new_row][new_col - 1]:
+    #                 arr[new_row][new_col - 1] = ['computer']
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[row][col] = ['target']
+    #             elif arr[new_row][new_col - 1] == ['computer']:
+    #                 pass
+    #             elif arr[new_row][new_col - 1] == ['target', 'computer']:
+    #                 pass
+    #             else:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[new_row][new_col - 1] = ['target', 'computer']
+    #                 arr[row][col] = ['target']
+    #         elif not arr[new_row][new_col - 1]:
+    #             arr[new_row][new_col - 1] = ['computer']
+    #             arr[new_row][new_col] = ['target', 'player']
+    #             arr[row][col] = ['target']
+    #         elif arr[new_row][new_col - 1] == ['target']:
+    #             print('reached a target')
+    #             if arr[row][col] == ['target', 'player']:
+    #                 arr[row][col] = ['target']
+    #             else:
+    #                 arr[row][col] = []
+    #             arr[new_row][new_col] = ['player']
+    #             arr[new_row][new_col - 1] = ['target', 'computer']
+    #
+    #     elif direction == 'up':
+    #         if not arr[new_row][new_col]:
+    #             arr[row][col] = ['target']
+    #             arr[new_row][new_col] = ['player']
+    #         elif arr[new_row][new_col] == ['wall']:
+    #             pass
+    #         elif arr[new_row - 1][new_col] == ['wall']:
+    #             arr[new_row][new_col] = ['target', 'player']
+    #             arr[row][col] = ['target']
+    #         elif arr[new_row][new_col] == ['target']:
+    #             if arr[new_row - 1][new_col] == ['target']:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 # arr[new_row - 1][new_col] = ['target']
+    #                 arr[row][col] = ['target']
+    #             elif arr[new_row - 1][new_col] == ['computer']:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[new_row - 1][new_col] = ['computer']
+    #                 arr[row][col] = ['target']
+    #             else:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[new_row - 1][new_col] = []
+    #                 arr[row][col] = ['target']
+    #         elif arr[new_row][new_col] == ['computer']:
+    #             if arr[new_row - 1][new_col] == ['target']:
+    #                 arr[new_row - 1][new_col] = ['target', 'computer']
+    #                 arr[new_row][new_col] = ['player']
+    #                 arr[row][col] = ['target']
+    #             else:
+    #                 arr[new_row][new_col] = ['player']
+    #                 arr[new_row - 1][new_col] = ['computer']
+    #                 arr[row][col] = ['target']
+    #         elif arr[new_row - 1][new_col] == ['target', 'computer']:
+    #             if not arr[new_row][new_col]:
+    #                 arr[new_row - 1][new_col] = ['computer']
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[row][col] = ['target']
+    #             elif arr[new_row - 1][new_col] == ['computer']:
+    #                 pass
+    #             elif arr[new_row - 1][new_col] == ['target', 'computer']:
+    #                 pass
+    #             else:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[new_row - 1][new_col] = ['target', 'computer']
+    #                 arr[row][col] = ['target']
+    #         elif not arr[new_row - 1][new_col]:
+    #             arr[new_row - 1][new_col] = ['computer']
+    #             arr[new_row][new_col] = ['target', 'player']
+    #             arr[row][col] = ['target']
+    #         elif arr[new_row - 1][new_col] == ['target']:
+    #             if arr[row][col] == ['target', 'player']:
+    #                 arr[row][col] = ['target']
+    #             else:
+    #                 arr[row][col] = []
+    #             arr[new_row][new_col] = ['player']
+    #             arr[new_row - 1][new_col] = ['target', 'computer']
+    #
+    #     elif direction == 'down':
+    #         if not arr[new_row][new_col]:
+    #             arr[row][col] = ['target']
+    #             arr[new_row][new_col] = ['player']
+    #         elif arr[new_row][new_col] == ['wall']:
+    #             pass
+    #         elif arr[new_row + 1][new_col] == ['wall']:
+    #             arr[new_row][new_col] = ['target', 'player']
+    #             arr[row][col] = ['target']
+    #         elif arr[new_row][new_col] == ['target']:
+    #             if arr[new_row + 1][new_col] == ['target']:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 # arr[new_row + 1][new_col] = ['target']
+    #                 arr[row][col] = ['target']
+    #             elif arr[new_row + 1][new_col] == ['computer']:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[new_row + 1][new_col] = ['computer']
+    #                 arr[row][col] = ['target']
+    #             else:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[new_row + 1][new_col] = []
+    #                 arr[row][col] = ['target']
+    #         elif arr[new_row][new_col] == ['computer']:
+    #             if arr[new_row + 1][new_col] == ['target']:
+    #                 arr[new_row + 1][new_col] = ['target', 'computer']
+    #                 arr[new_row][new_col] = ['player']
+    #                 arr[row][col] = ['target']
+    #             else:
+    #                 arr[new_row][new_col] = ['player']
+    #                 arr[new_row + 1][new_col] = ['computer']
+    #                 arr[row][col] = ['target']
+    #         elif arr[new_row + 1][new_col] == ['target', 'computer']:
+    #             if not arr[new_row][new_col]:
+    #                 arr[new_row + 1][new_col] = ['computer']
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[row][col] = ['target']
+    #             elif arr[new_row + 1][new_col] == ['computer']:
+    #                 pass
+    #             elif arr[new_row + 1][new_col] == ['target', 'computer']:
+    #                 pass
+    #             else:
+    #                 arr[new_row][new_col] = ['target', 'player']
+    #                 arr[new_row + 1][new_col] = ['target', 'computer']
+    #                 arr[row][col] = ['target']
+    #         elif not arr[new_row + 1][new_col]:
+    #             arr[new_row + 1][new_col] = ['computer']
+    #             arr[new_row][new_col] = ['target', 'player']
+    #             arr[row][col] = ['target']
+    #
+    #         elif arr[new_row + 1][new_col] == ['target']:
+    #             print('reached a target')
+    #             if arr[row][col] == ['target', 'player']:
+    #                 arr[row][col] = ['target']
+    #             else:
+    #                 arr[row][col] = []
+    #             arr[new_row][new_col] = ['player']
+    #             arr[new_row + 1][new_col] = ['target', 'computer']
+    #     return arr
 
     if arr[new_row][new_col] == ['wall']:
         pass
@@ -335,7 +335,6 @@ def move_player(arr, direction):
                 arr[new_row][new_col] = ['player']
 
             elif not arr[new_row][new_col + 1]:
-                print('reached a space')
                 temp = arr[new_row][new_col]
                 arr[new_row][new_col] = arr[row][col]
                 arr[row][col] = arr[new_row][new_col + 1]
@@ -347,7 +346,6 @@ def move_player(arr, direction):
                 arr[new_row][new_col] = ['player']
 
             elif not arr[new_row][new_col - 1]:
-                print('reached a space')
                 temp = arr[new_row][new_col]
                 arr[new_row][new_col] = arr[row][col]
                 arr[row][col] = arr[new_row][new_col - 1]
@@ -359,7 +357,6 @@ def move_player(arr, direction):
                 arr[new_row][new_col] = ['player']
 
             elif not arr[new_row - 1][new_col]:
-                print('reached a space')
                 temp = arr[new_row][new_col]
                 arr[new_row][new_col] = arr[row][col]
                 arr[row][col] = arr[new_row - 1][new_col]
@@ -371,7 +368,6 @@ def move_player(arr, direction):
                 arr[new_row][new_col] = ['player']
 
             elif not arr[new_row + 1][new_col]:
-                print('reached a space')
                 temp = arr[new_row][new_col]
                 arr[new_row][new_col] = arr[row][col]
                 arr[row][col] = arr[new_row + 1][new_col]
@@ -419,6 +415,18 @@ def move_player(arr, direction):
                 arr[row][col] = []
                 arr[new_row][new_col] = ['target', 'player']
                 arr[new_row + 1][new_col] = ['computer']
+    elif arr[row][col] == ['target', 'player']:
+        if not arr[new_row][new_col]:
+            arr[row][col] = ['target']
+            arr[new_row][new_col] = ['player']
+        if direction == 'right':
+            pass
+        elif direction == 'left':
+            pass
+        elif direction == 'up':
+            pass
+        elif direction == 'down':
+            pass
     else:
         temp = arr[row][col]
         arr[row][col] = arr[new_row][new_col]
