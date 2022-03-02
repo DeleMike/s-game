@@ -1,8 +1,5 @@
 # 6.009 Lab 2: Snekoban
 
-import json
-import typing
-
 # NO ADDITIONAL IMPORTS!
 
 
@@ -12,6 +9,8 @@ direction_vector = {
     "left": (0, -1),
     "right": (0, +1),
 }
+
+game_just_started = True
 
 
 def get_player_pos(arr):
@@ -103,17 +102,17 @@ def move_player(arr, direction):
                 arr[new_row][new_col] = ['player']
             elif arr[new_row][new_col] == ['wall']:
                 pass
-            elif arr[new_row][new_col+1] == ['wall']:
+            elif arr[new_row][new_col + 1] == ['wall']:
                 arr[new_row][new_col] = ['target', 'player']
                 arr[row][col] = ['target']
             elif arr[new_row][new_col] == ['target']:
-                if arr[new_row][new_col+1] == ['target']:
+                if arr[new_row][new_col + 1] == ['target']:
                     arr[new_row][new_col] = ['target', 'player']
                     # arr[new_row][new_col + 1] = ['target']
                     arr[row][col] = ['target']
-                elif arr[new_row][new_col+1] == ['computer']:
+                elif arr[new_row][new_col + 1] == ['computer']:
                     arr[new_row][new_col] = ['target', 'player']
-                    arr[new_row][new_col+1] = ['computer']
+                    arr[new_row][new_col + 1] = ['computer']
                     arr[row][col] = ['target']
                 else:
                     arr[new_row][new_col] = ['target', 'player']
@@ -160,7 +159,7 @@ def move_player(arr, direction):
                 arr[new_row][new_col] = ['player']
             elif arr[new_row][new_col] == ['wall']:
                 pass
-            elif arr[new_row][new_col-1] == ['wall']:
+            elif arr[new_row][new_col - 1] == ['wall']:
                 arr[new_row][new_col] = ['target', 'player']
                 arr[row][col] = ['target']
             elif arr[new_row][new_col] == ['target']:
@@ -305,7 +304,7 @@ def move_player(arr, direction):
                     arr[row][col] = ['target']
                 elif arr[new_row + 1][new_col] == ['computer']:
                     pass
-                elif arr[new_row + 1][new_col] == ['target','computer']:
+                elif arr[new_row + 1][new_col] == ['target', 'computer']:
                     pass
                 else:
                     arr[new_row][new_col] = ['target', 'player']
@@ -461,7 +460,6 @@ def victory_check(game):
 
     # first, we get the total number of computers and targets and compare
 
-
     computer_count = 0
     target_count = 0
     for rows in game:
@@ -488,9 +486,9 @@ def step_game(game, direction):
 
     This function should not mutate its input.
     """
-    player_has_won = victory_check(game)
-    if not player_has_won:
-        return move_player(game, direction)
+    global game_just_started
+    game_just_started = False
+    return move_player(game, direction)
 
 
 def dump_game(game):
@@ -504,6 +502,20 @@ def dump_game(game):
     print out the current state of your game for testing and debugging on your
     own.
     """
+
+    # check if all the computers and targets are successfully placed correctly
+    player_has_won = victory_check(game)
+
+    # if the game just started and all the computers and targets are not successfully placed correctly then display the
+    # game board
+    if game_just_started and not player_has_won:
+        return game
+    # if the game just started and all the computers and targets are already successfully placed correctly then
+    # display the game board
+    elif game_just_started and player_has_won:
+        return game
+
+    # else, just display the game board
     return game
 
 

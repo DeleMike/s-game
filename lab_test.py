@@ -153,7 +153,7 @@ def move_player(arr, direction):
     if arr[new_row][new_col] == ['wall']:
         print('reached a wall')
     elif arr[new_row][new_col] == ['computer']:
-        if direction == 'right' and arr[new_row][new_col+1] == []:
+        if direction == 'right' and arr[new_row][new_col + 1] == []:
             print('there is a space')
     else:
         arr[row][col] = arr[new_row][new_col]
@@ -192,6 +192,21 @@ def check_victory_condition(arr):
     return False
 
 
-print('The function returned: ', check_victory_condition(game))
+# print('The function returned: ', check_victory_condition(game))
 
 
+def check_arr():
+    ls = [[[], [], [], ["wall"], ["wall"], ["wall"], ["wall"]], [[], [], [], ["wall"], [], [], ["wall"]],
+          [[], [], [], ["wall"], ["player"], [], ["wall"]],
+          [["wall"], ["wall"], ["wall"], ["wall"], [], ["target", "computer"], ["wall"]],
+          [["wall"], [], [], [], [], ["target", "computer"], ["wall"]],
+          [["wall"], [], ["wall"], [], [], ["target", "computer"], ["wall"]],
+          [["wall"], [], [], [], [], ["wall"], ["wall"]],
+          [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], []]]
+
+    for i in ls:
+        for j in i:
+            print(i)
+
+
+# check_arr()
