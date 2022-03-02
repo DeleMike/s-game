@@ -9,32 +9,42 @@
 # ]
 
 game = [
-  [[], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
-  [[], ["wall"], [], [], [], [], [], ["wall"]],
-  [[], ["wall"], [], ["target"], ["computer"], ["target"], [], ["wall"]],
-  [
-    ["wall"],
-    ["wall"],
-    [],
-    ["computer"],
-    ["player"],
-    ["computer"],
-    [],
-    ["wall"]
-  ],
-  [["wall"], [], [], ["target"], ["computer"], ["target"], [], ["wall"]],
-  [["wall"], [], [], [], [], [], [], ["wall"]],
-  [
-    ["wall"],
-    ["wall"],
-    ["wall"],
-    ["wall"],
-    ["wall"],
-    ["wall"],
-    ["wall"],
-    ["wall"]
-  ]
+    [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
+    [["wall"], [], [], [], [], ["wall"]],
+    [["wall"], [], ["wall"], ["player"], [], ["wall"]],
+    [["wall"], [], ["target", "computer"], ["target", "computer"], [], ["wall"]],
+    [["wall"], [], [], ["target", "computer"], [], ["wall"]],
+    [["wall"], [], [], [], [], ["wall"]],
+    [["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]]
 ]
+
+# game = [
+#   [[], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"], ["wall"]],
+#   [[], ["wall"], [], [], [], [], [], ["wall"]],
+#   [[], ["wall"], [], ["target"], ["computer"], ["target"], [], ["wall"]],
+#   [
+#     ["wall"],
+#     ["wall"],
+#     [],
+#     ["computer"],
+#     ["player"],
+#     ["computer"],
+#     [],
+#     ["wall"]
+#   ],
+#   [["wall"], [], [], ["target"], ["computer"], ["target"], [], ["wall"]],
+#   [["wall"], [], [], [], [], [], [], ["wall"]],
+#   [
+#     ["wall"],
+#     ["wall"],
+#     ["wall"],
+#     ["wall"],
+#     ["wall"],
+#     ["wall"],
+#     ["wall"],
+#     ["wall"]
+#   ]
+# ]
 
 
 # game = [
@@ -145,7 +155,6 @@ def move_player(arr, direction):
     elif arr[new_row][new_col] == ['computer']:
         if direction == 'right' and arr[new_row][new_col+1] == []:
             print('there is a space')
-        # TODO: Implement how to move both the computer and player in the desired direction without constraints
     else:
         arr[row][col] = arr[new_row][new_col]
         arr[new_row][new_col] = temp
@@ -153,21 +162,36 @@ def move_player(arr, direction):
     return arr
 
 
-num = 0
-while num < 5:
-    move_player(game, 'right')
-    # print('I want to move the player "right": ', move_player(game, 'right'))
-    num += 1
+# num = 0
+# while num < 5:
+#     move_player(game, 'right')
+#     # print('I want to move the player "right": ', move_player(game, 'right'))
+#     num += 1
 
 
-# def swap_three_items():
-#     arr = ['a', ' ', 'b', 'c', ' ', 'd']
-#     temp = arr[3]
-#     arr[3] = arr[2]
-#     arr[2] = arr[4]
-#     arr[4] = temp
-#     return arr
-#
-#
-# print(swap_three_items())
+def check_victory_condition(arr):
+    # check if any single ['computer'] and ['target'] still exists
+    # check if number of computers == targets
+
+    # first, we get the total number of computers and targets and compare
+
+    computer_count = 0
+    target_count = 0
+    for rows in arr:
+        for obj in rows:
+            if obj == ['computer']:
+                computer_count += 1
+            elif obj == ['target']:
+                target_count += 1
+
+    print('The number of computers are: ', computer_count, '\nThe number of targets are: ', target_count)
+
+    if computer_count == 0 and target_count == 0:
+        return True
+
+    return False
+
+
+print('The function returned: ', check_victory_condition(game))
+
 
