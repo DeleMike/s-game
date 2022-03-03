@@ -349,9 +349,12 @@ def move_player(arr, direction):
                     arr[new_row][new_col] = ['player']
                     arr[row][col] = ['target']
             elif arr[new_row][new_col] == ['computer']:
-                arr[row][col] = ['target']
-                arr[new_row][new_col] = ['player', 'player']
-                arr[new_row][new_col + 1] = ['target', 'computer']
+                if arr[new_row][new_col + 1] == ['wall']:
+                    pass
+                else:
+                    arr[row][col] = ['target']
+                    arr[new_row][new_col] = ['player', 'player']
+                    arr[new_row][new_col + 1] = ['target', 'computer']
         elif direction == 'left':
             if arr[new_row][new_col] == ['target']:
                 arr[row][col] = ['target']
@@ -370,9 +373,12 @@ def move_player(arr, direction):
                     arr[new_row][new_col] = ['player']
                     arr[row][col] = ['target']
             elif arr[new_row][new_col] == ['computer']:
-                arr[new_row][new_col] = ['player']
-                arr[new_row][new_col - 1] = ['target', 'computer']
-                arr[row][col] = ['target']
+                if arr[new_row][new_col - 1] == ['wall']:
+                    pass
+                else:
+                    arr[new_row][new_col] = ['player']
+                    arr[new_row][new_col - 1] = ['target', 'computer']
+                    arr[row][col] = ['target']
         elif direction == 'up':
             if arr[new_row][new_col] == ['target']:
                 arr[row][col] = ['target']
@@ -391,9 +397,12 @@ def move_player(arr, direction):
                     arr[new_row][new_col] = ['player']
                     arr[row][col] = ['target']
             elif arr[new_row][new_col] == ['computer']:
-                arr[new_row][new_col] = ['player']
-                arr[new_row - 1][new_col] = ['target', 'computer']
-                arr[row][col] = ['target']
+                if arr[new_row - 1][new_col] == ['wall']:
+                    pass
+                else:
+                    arr[new_row][new_col] = ['player']
+                    arr[new_row - 1][new_col] = ['target', 'computer']
+                    arr[row][col] = ['target']
         elif direction == 'down':
             if arr[new_row][new_col] == ['target']:
                 arr[row][col] = ['target']
@@ -412,9 +421,13 @@ def move_player(arr, direction):
                     arr[new_row][new_col] = ['player']
                     arr[row][col] = ['target']
             elif arr[new_row][new_col] == ['computer']:
-                arr[new_row][new_col] = ['player']
-                arr[new_row + 1][new_col] = ['target', 'computer']
-                arr[row][col] = ['target']
+                if arr[new_row + 1][new_col] == ['wall']:
+                    pass
+                else:
+                    arr[new_row][new_col] = ['player']
+                    arr[new_row + 1][new_col] = ['target', 'computer']
+                    arr[row][col] = ['target']
+
     elif arr[new_row][new_col] == ['computer']:
         if direction == 'right':
             if arr[new_row][new_col + 1] == ['target']:
