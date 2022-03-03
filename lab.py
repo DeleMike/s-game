@@ -351,6 +351,8 @@ def move_player(arr, direction):
             elif arr[new_row][new_col] == ['computer']:
                 if arr[new_row][new_col + 1] == ['wall']:
                     pass
+                elif arr[new_row + 1][new_col] == ['computer']:
+                    pass
                 else:
                     arr[row][col] = ['target']
                     arr[new_row][new_col] = ['player', 'player']
@@ -374,6 +376,8 @@ def move_player(arr, direction):
                     arr[row][col] = ['target']
             elif arr[new_row][new_col] == ['computer']:
                 if arr[new_row][new_col - 1] == ['wall']:
+                    pass
+                elif arr[new_row + 1][new_col] == ['computer']:
                     pass
                 else:
                     arr[new_row][new_col] = ['player']
@@ -399,6 +403,8 @@ def move_player(arr, direction):
             elif arr[new_row][new_col] == ['computer']:
                 if arr[new_row - 1][new_col] == ['wall']:
                     pass
+                elif arr[new_row + 1][new_col] == ['computer']:
+                    pass
                 else:
                     arr[new_row][new_col] = ['player']
                     arr[new_row - 1][new_col] = ['target', 'computer']
@@ -410,7 +416,7 @@ def move_player(arr, direction):
             elif not arr[new_row][new_col]:
                 arr[new_row][new_col] = ['player']
                 arr[row][col] = ['target']
-            elif arr[new_row][new_col - 1] == ['wall']:
+            elif arr[new_row + 1][new_col] == ['wall']:
                 pass
             elif not arr[new_row + 1][new_col]:
                 if not arr[new_row][new_col]:
@@ -422,6 +428,8 @@ def move_player(arr, direction):
                     arr[row][col] = ['target']
             elif arr[new_row][new_col] == ['computer']:
                 if arr[new_row + 1][new_col] == ['wall']:
+                    pass
+                elif arr[new_row + 1][new_col] == ['computer']:
                     pass
                 else:
                     arr[new_row][new_col] = ['player']
@@ -570,7 +578,7 @@ def victory_check(game):
             elif obj == ['target', 'computer']:
                 comp_and_target_found += 1
 
-    print('The number of computers are: ', computer_count, '\nThe number of targets are: ', target_count)
+    # print('The number of computers are: ', computer_count, '\nThe number of targets are: ', target_count)
 
     if computer_count == 0 and target_count == 0 and comp_and_target_found > 0:
         return True
