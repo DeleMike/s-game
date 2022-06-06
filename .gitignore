@@ -1,9 +1,4 @@
 .idea
 __pycache__/
-/puzzles
-/test_inputs
-/test_levels
 /test_outputs
-/ui
 Lab 2 Snekoban 6.009 Spring 2022.pdf
-server.py
